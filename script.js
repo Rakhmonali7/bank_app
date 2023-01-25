@@ -174,14 +174,34 @@ btnTransfer.addEventListener('click', function (e) {
     updateUI(currentAccount);
   }
 });
+// Loan request
+btnLoan.addEventListener('click', function(e){
+  e.preventDefault()
+  let amount = Number(inputLoanAmount.value).toExponential
+
+  if(amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)){
+    currentAccount.movements.push(amount)
+
+    // update UI
+    updateUI(currentAccount)
+  }
+  inputLoanAmount.value = '' 
+})
 
 //Close account
 
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();
-  if (inputCloseUsername.value) {
+  if (inputCloseUsername.value === currentAccount.username && currentAccount?.pin === Number(inputClosePin.value)) {
+
+    const index = accounts.findIndex( acc => acc.username === currentAccount.username)
+    accounts.splice(index,1)
+    containerApp.style.opacity = 0
   }
+  inputCloseUsername.value = inputClosePin.value = '';
+  
 });
+    
 /////////////////////////////////////////////////
 // LECTURES
 // challenge 1
