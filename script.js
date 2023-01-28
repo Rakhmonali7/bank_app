@@ -229,3 +229,51 @@ btnSort.addEventListener('click', function(e){
 //     dog >= 3
 //       ? console.log(`Dog number ${i + 1} is an adult, and is ${dog} years old`)
 //
+// const convertTitleCase = function(str){
+//   let exceptionLIst = ['a', 'an', 'the', 'with', 'on', 'in']
+//   let title = str.toLowerCase().split(' ').map( word => exceptionLIst.includes(word) ? word : word[0].toUpperCase() + word.slice(1));
+//   return title
+// }
+
+// console.log(convertTitleCase('This is a cat'));
+// console.log(convertTitleCase('This IS an EXAMPLE'));
+// console.log(convertTitleCase('TEST ME'));
+
+
+// TEST DATA
+
+const dogs =[
+  {weight:22, curFood:23, owners:['Alice', 'Bob']},
+  {weight:8, curFood:200, owners:['Matilda']},
+  {weight:13, curFood:275, owners:['Sarah', 'John']},
+  {weight:32, curFood:340, owners:['Michel']}
+]
+
+//1.
+dogs.forEach(dog => dog.recFood = Math.trunc(dog.weight**0.75*28))
+
+
+//2.
+const dogSarah = dogs.find( dog => dog.owners.includes('Sarah'))
+console.log(dogSarah);
+console.log(`Sarah's dog eats ${dogSarah.curFood > dogSarah.recFood ? 'too much' : 'too little'}`);
+
+//3.
+const ownersEatTooMuch = dogs.filter( dog => dog.curFood > dog.recFood).flatMap( dog => dog.owners)
+console.log(ownersEatTooMuch);
+const ownersEatTooLittle = dogs.filter( dog => dog.curFood < dog.recFood).flatMap( dog => dog.owners)
+console.log(ownersEatTooLittle);
+
+//5
+const eatProperly = dogs.some(dog => dog.curFood === dog.recFood)
+console.log(eatProperly);
+
+//6
+const eatProperly2 = dogs.some(dog => dog.curFood > dog.recomFood * 0.9 && dog.curFood < recommended * 1.1)
+console.log(eatProperly2);
+
+//8
+const checkEatingOkay = dog => dog.curFood > dog.curFood* 0.9 && curFood < dog.recFood* 1.1;
+
+const lastStep = dogs.slice().sort((a,b) => a.recFood-b.recFood)
+console.log(lastStep);
